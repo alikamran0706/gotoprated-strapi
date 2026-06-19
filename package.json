@@ -1,8 +1,8 @@
 {
-  "name": "fly-kaaba",
+  "name": "go-top-rated",
   "version": "0.1.0",
   "private": true,
-  "description": "Fly Kaaba application",
+  "description": "Go Top Rated application",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" strapi build",
     "dev": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" strapi develop",

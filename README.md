@@ -1,12 +1,12 @@
-✈️ Fly Kaaba – Strapi Backend
+✈️ Go top Rated – Strapi Backend
 
-Fly Kaaba is a Strapi-powered backend designed to manage travel, accommodation, and pilgrimage-related content with a structured and scalable API.
+Go top Rated is a Strapi-powered backend designed to manage travel, accommodation, and pilgrimage-related content with a structured and scalable API.
 
-📖 Read More — Fly Kaaba
+📖 Read More — Go top Rated
 
-Fly Kaaba enables administrators to manage accommodations, quality ratings (1–7 star system), travel packages, and other pilgrimage services efficiently using Strapi’s headless CMS.
+Go top Rated enables administrators to manage accommodations, quality ratings (1–7 star system), travel packages, and other pilgrimage services efficiently using Strapi’s headless CMS.
 
-Built for flexibility and growth, Fly Kaaba integrates seamlessly with modern frontend frameworks and supports secure, role-based content management.
+Built for flexibility and growth, Go top Rated integrates seamlessly with modern frontend frameworks and supports secure, role-based content management.
 
 🧰 Requirements
 
