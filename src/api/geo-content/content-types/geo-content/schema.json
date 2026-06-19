@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "geo_contents",
+  "info": {
+    "singularName": "geo-content",
+    "pluralName": "geo-contents",
+    "displayName": "Geo Content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "header": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "banner": {
+      "type": "richtext"
+    },
+    "area": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::area.area",
+      "inversedBy": "geo_content"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::city.city",
+      "inversedBy": "geo_content"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country",
+      "inversedBy": "geo_content"
+    },
+    "meta_tags": {
+      "type": "component",
+      "component": "banner.meta-tags",
+      "repeatable": false
+    },
+    "faqs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::faq.faq",
+      "mappedBy": "geo_content"
+    }
+  }
+}

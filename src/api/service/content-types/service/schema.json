@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "description": {
+      "type": "text"
+    },
+    "base_price": {
+      "type": "decimal"
+    },
+    "duration_minutes": {
+      "type": "integer"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "services"
+    },
+    "service_status": {
+      "type": "enumeration",
+      "enum": [
+        "Reject",
+        "Verified",
+        "Pending",
+        "Draft"
+      ]
+    },
+    "rejection_reason": {
+      "type": "text"
+    },
+    "views": {
+      "type": "integer"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "service_contents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-content.service-content",
+      "mappedBy": "service"
+    }
+  }
+}

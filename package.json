@@ -1,0 +1,50 @@
+{
+  "name": "fly-kaaba",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fly Kaaba application",
+  "scripts": {
+    "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" strapi build",
+    "dev": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" strapi develop",
+    "develop": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" strapi develop",
+    "start": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096\" strapi start",
+    "console": "strapi console",
+    "deploy": "strapi deploy",
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+  },
+  "dependencies": {
+    "@_sh/strapi-plugin-ckeditor": "^6.0.2",
+    "@strapi-community/plugin-io": "^5.3.1",
+    "@strapi/design-system": "^2.0.0-rc.23",
+    "@strapi/plugin-cloud": "^5.41.1",
+    "@strapi/plugin-graphql": "^5.41.1",
+    "@strapi/plugin-users-permissions": "^5.41.1",
+    "@strapi/provider-email-nodemailer": "^5.16.0",
+    "@strapi/strapi": "^5.41.1",
+    "better-sqlite3": "11.3.0",
+    "mysql2": "^3.14.1",
+    "pg": "^8.17.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "strapi-plugin-multi-select": "^2.1.1",
+    "styled-components": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "cross-env": "^10.1.0",
+    "esbuild": "^0.25.8",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": "532257ec-af0f-4c93-8db6-74a59be5b587"
+  }
+}

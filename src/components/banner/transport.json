@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_banner_transports",
+  "info": {
+    "displayName": "transport"
+  },
+  "options": {},
+  "attributes": {
+    "ac_transport": {
+      "type": "boolean",
+      "default": false
+    },
+    "makkah_to_madina": {
+      "type": "boolean",
+      "default": false
+    },
+    "transport_type": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[]",
+      "options": [
+        "Bus",
+        "Private Car",
+        "Luxury Coach"
+      ]
+    }
+  },
+  "config": {}
+}

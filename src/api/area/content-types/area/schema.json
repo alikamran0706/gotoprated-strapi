@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "areas",
+  "info": {
+    "singularName": "area",
+    "pluralName": "areas",
+    "displayName": "Area"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "areas"
+    },
+    "geo_content": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo-content.geo-content",
+      "mappedBy": "area"
+    },
+    "category_contents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category-content.category-content",
+      "mappedBy": "area"
+    },
+    "service_contents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-content.service-content",
+      "mappedBy": "area"
+    },
+    "company_locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company-location.company-location",
+      "mappedBy": "area"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "company_locations",
+  "info": {
+    "singularName": "company-location",
+    "pluralName": "company-locations",
+    "displayName": "Company Location"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "company_locations"
+    },
+    "inquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inquiry.inquiry",
+      "mappedBy": "company_location"
+    },
+    "address": {
+      "type": "string"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "company_locations"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "company_locations"
+    },
+    "area": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::area.area",
+      "inversedBy": "company_locations"
+    },
+    "zip_code": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "decimal"
+    },
+    "lng": {
+      "type": "decimal"
+    },
+    "years_in_business": {
+      "type": "decimal"
+    },
+    "is_primary": {
+      "type": "boolean",
+      "default": false
+    },
+    "social_links": {
+      "type": "json"
+    },
+    "buisness_hours": {
+      "type": "json"
+    },
+    "iata": {
+      "type": "string"
+    }
+  }
+}

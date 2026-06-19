@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inquiries",
+  "info": {
+    "singularName": "inquiry",
+    "pluralName": "inquiries",
+    "displayName": "Inquiry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "countryCode": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "source": {
+      "type": "string"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "inquiries"
+    },
+    "planned_month": {
+      "type": "enumeration",
+      "enum": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December "
+      ]
+    },
+    "preferred_start_date": {
+      "type": "date"
+    },
+    "stay_duration_days": {
+      "type": "integer"
+    },
+    "adult_count": {
+      "type": "integer"
+    },
+    "child_count": {
+      "type": "integer"
+    },
+    "departure_city": {
+      "type": "string"
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "company_location": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company-location.company-location",
+      "inversedBy": "inquiries"
+    }
+  }
+}

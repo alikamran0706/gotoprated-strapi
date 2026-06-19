@@ -1,0 +1,64 @@
+{
+  "collectionName": "components_banner_hotel_details",
+  "info": {
+    "displayName": "hotel_details"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "rating": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[]",
+      "max": 1,
+      "options": [
+        "1-star",
+        "2-star",
+        "3-star",
+        "4-star",
+        "5-star",
+        "6-star",
+        "7-star"
+      ]
+    },
+    "walking_time": {
+      "type": "string"
+    },
+    "distance": {
+      "type": "string"
+    },
+    "nights": {
+      "type": "integer"
+    },
+    "place_id": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "photo_references": {
+      "type": "json"
+    },
+    "google_rating": {
+      "type": "decimal"
+    },
+    "lat": {
+      "type": "decimal"
+    },
+    "lng": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}

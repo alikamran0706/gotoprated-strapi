@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_links_links",
+  "info": {
+    "displayName": "Links"
+  },
+  "options": {},
+  "attributes": {
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::city.city"
+    },
+    "pages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::page.page"
+    },
+    "settings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::setting.setting"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cities",
+  "info": {
+    "singularName": "city",
+    "pluralName": "cities",
+    "displayName": "City",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "ss": {
+      "type": "string"
+    },
+    "state": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::state.state",
+      "inversedBy": "cities"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "cities"
+    },
+    "is_popular": {
+      "type": "boolean",
+      "default": false
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "areas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::area.area",
+      "mappedBy": "city"
+    },
+    "geo_content": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::geo-content.geo-content",
+      "mappedBy": "city"
+    },
+    "category_contents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category-content.category-content",
+      "mappedBy": "city"
+    },
+    "service_contents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-content.service-content",
+      "mappedBy": "city"
+    },
+    "company_locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company-location.company-location",
+      "mappedBy": "city"
+    }
+  }
+}

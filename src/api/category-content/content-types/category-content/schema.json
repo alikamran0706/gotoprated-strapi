@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "category_contents",
+  "info": {
+    "singularName": "category-content",
+    "pluralName": "category-contents",
+    "displayName": "Category Content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "header": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "category_contents"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "category_contents"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "category_contents"
+    },
+    "area": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::area.area",
+      "inversedBy": "category_contents"
+    },
+    "meta_tags": {
+      "type": "component",
+      "component": "banner.meta-tags",
+      "repeatable": false
+    }
+  }
+}

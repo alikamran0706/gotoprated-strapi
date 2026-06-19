@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "faqs",
+  "info": {
+    "singularName": "faq",
+    "pluralName": "faqs",
+    "displayName": "Faq"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question": {
+      "type": "text"
+    },
+    "answer": {
+      "type": "text"
+    },
+    "creator": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "faqs"
+    },
+    "geo_content": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::geo-content.geo-content",
+      "inversedBy": "faqs"
+    },
+    "service_content": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service-content.service-content",
+      "inversedBy": "faqs"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "faqs"
+    }
+  }
+}

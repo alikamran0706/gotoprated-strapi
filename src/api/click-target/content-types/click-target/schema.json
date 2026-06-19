@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "click_targets",
+  "info": {
+    "singularName": "click-target",
+    "pluralName": "click-targets",
+    "displayName": "Click Tracking"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "listing_name": {
+      "type": "string"
+    }
+  }
+}

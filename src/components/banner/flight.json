@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_banner_flights",
+  "info": {
+    "displayName": "flight"
+  },
+  "options": {},
+  "attributes": {
+    "airline_name": {
+      "type": "string"
+    },
+    "flight_type": {
+      "type": "enumeration",
+      "enum": [
+        "Direct",
+        "Connecting"
+      ]
+    },
+    "baggage_kg": {
+      "type": "decimal"
+    },
+    "transit_city": {
+      "type": "string"
+    },
+    "flight_included": {
+      "type": "boolean",
+      "default": false
+    },
+    "departure_detail": {
+      "type": "string"
+    },
+    "arrival_detail": {
+      "type": "string"
+    },
+    "seat_type": {
+      "type": "enumeration",
+      "default": "Economy",
+      "enum": [
+        "Window",
+        "Aisle",
+        "Middle",
+        "Front",
+        "Rear",
+        "Exit_Row",
+        "Bulkhead",
+        "VIP",
+        "Economy",
+        "Business",
+        "First_Class"
+      ]
+    }
+  },
+  "config": {}
+}
