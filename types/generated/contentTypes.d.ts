@@ -534,6 +534,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::category-content.category-content'
     >;
+    companies: Schema.Attribute.Relation<'manyToMany', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -772,6 +773,10 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
     company_content: Schema.Attribute.Relation<
       'oneToOne',
       'api::company-content.company-content'
@@ -800,7 +805,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     rejection_reason: Schema.Attribute.Text;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
-    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
+    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1232,7 +1237,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   attributes: {
     base_price: Schema.Attribute.Decimal;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

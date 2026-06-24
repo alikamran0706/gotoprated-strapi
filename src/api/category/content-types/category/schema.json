@@ -48,6 +48,12 @@
       "relation": "oneToMany",
       "target": "api::service.service",
       "mappedBy": "category"
+    },
+    "companies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::company.company",
+      "inversedBy": "categories"
     }
   }
 }

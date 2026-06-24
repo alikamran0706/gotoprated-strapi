@@ -70,17 +70,23 @@
       "target": "api::review.review",
       "mappedBy": "company"
     },
-    "service": {
+    "services": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "api::service.service",
-      "inversedBy": "companies"
+      "mappedBy": "company"
     },
     "company_content": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::company-content.company-content",
       "mappedBy": "company"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "companies"
     }
   }
 }

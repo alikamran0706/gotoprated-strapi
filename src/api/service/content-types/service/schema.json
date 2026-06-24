@@ -58,11 +58,11 @@
       "target": "api::service-content.service-content",
       "mappedBy": "service"
     },
-    "companies": {
+    "company": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::company.company",
-      "mappedBy": "service"
+      "inversedBy": "services"
     },
     "tags": {
       "type": "relation",
