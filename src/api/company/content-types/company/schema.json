@@ -75,6 +75,12 @@
       "relation": "manyToOne",
       "target": "api::service.service",
       "inversedBy": "companies"
+    },
+    "company_content": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::company-content.company-content",
+      "mappedBy": "company"
     }
   }
 }

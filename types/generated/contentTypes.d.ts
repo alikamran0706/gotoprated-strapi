@@ -675,6 +675,47 @@ export interface ApiClickTargetClickTarget extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCompanyContentCompanyContent
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'company_contents';
+  info: {
+    displayName: 'Company Content';
+    pluralName: 'company-contents';
+    singularName: 'company-content';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    company: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    gallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::company-content.company-content'
+    > &
+      Schema.Attribute.Private;
+    meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCompanyLocationCompanyLocation
   extends Struct.CollectionTypeSchema {
   collectionName: 'company_locations';
@@ -731,6 +772,10 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    company_content: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::company-content.company-content'
+    >;
     company_locations: Schema.Attribute.Relation<
       'oneToMany',
       'api::company-location.company-location'
@@ -1882,6 +1927,7 @@ declare module '@strapi/strapi' {
       'api::chat.chat': ApiChatChat;
       'api::city.city': ApiCityCity;
       'api::click-target.click-target': ApiClickTargetClickTarget;
+      'api::company-content.company-content': ApiCompanyContentCompanyContent;
       'api::company-location.company-location': ApiCompanyLocationCompanyLocation;
       'api::company.company': ApiCompanyCompany;
       'api::country.country': ApiCountryCountry;
