@@ -11,16 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "banner": {
-      "type": "richtext"
-    },
-    "content": {
-      "type": "customField",
-      "customField": "plugin::ckeditor5.CKEditor",
-      "options": {
-        "preset": "defaultHtml"
-      }
-    },
     "header": {
       "type": "text"
     },
@@ -55,6 +45,22 @@
       "type": "component",
       "component": "banner.meta-tags",
       "repeatable": false
+    },
+    "banner": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "faqs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::faq.faq",
+      "mappedBy": "category_content"
     }
   }
 }

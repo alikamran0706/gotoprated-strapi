@@ -17,16 +17,6 @@
     "description": {
       "type": "text"
     },
-    "content": {
-      "type": "customField",
-      "customField": "plugin::ckeditor5.CKEditor",
-      "options": {
-        "preset": "defaultHtml"
-      }
-    },
-    "banner": {
-      "type": "richtext"
-    },
     "area": {
       "type": "relation",
       "relation": "oneToOne",
@@ -55,6 +45,16 @@
       "relation": "oneToMany",
       "target": "api::faq.faq",
       "mappedBy": "geo_content"
+    },
+    "banner": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }

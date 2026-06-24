@@ -40,6 +40,12 @@
       "relation": "manyToOne",
       "target": "api::company.company",
       "inversedBy": "faqs"
+    },
+    "category_content": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category-content.category-content",
+      "inversedBy": "faqs"
     }
   }
 }

@@ -23,13 +23,6 @@
     "features": {
       "type": "json"
     },
-    "content": {
-      "type": "customField",
-      "customField": "plugin::ckeditor5.CKEditor",
-      "options": {
-        "preset": "defaultHtml"
-      }
-    },
     "cover": {
       "type": "media",
       "multiple": false,
@@ -90,6 +83,13 @@
       "type": "component",
       "component": "banner.meta-tags",
       "repeatable": false
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }
