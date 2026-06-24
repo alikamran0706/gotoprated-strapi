@@ -862,7 +862,6 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
       'api::service-content.service-content'
     >;
     slug: Schema.Attribute.UID<'name'>;
-    states: Schema.Attribute.Relation<'oneToMany', 'api::state.state'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1326,7 +1325,6 @@ export interface ApiStateState extends Struct.CollectionTypeSchema {
           preset: 'defaultHtml';
         }
       >;
-    country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -27,12 +27,6 @@
       "target": "api::city.city",
       "mappedBy": "country"
     },
-    "states": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::state.state",
-      "mappedBy": "country"
-    },
     "currency": {
       "type": "string"
     },
