@@ -31,9 +31,6 @@
     "description": {
       "type": "text"
     },
-    "website": {
-      "type": "string"
-    },
     "is_verified": {
       "type": "boolean",
       "default": false
@@ -72,6 +69,12 @@
       "relation": "oneToMany",
       "target": "api::review.review",
       "mappedBy": "company"
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "companies"
     }
   }
 }

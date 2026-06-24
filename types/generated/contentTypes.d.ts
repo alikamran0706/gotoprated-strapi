@@ -755,6 +755,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     rejection_reason: Schema.Attribute.Text;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
+    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -763,7 +764,6 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    website: Schema.Attribute.String;
   };
 }
 
@@ -1187,6 +1187,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   attributes: {
     base_price: Schema.Attribute.Decimal;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1210,6 +1211,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       ['Reject', 'Verified', 'Pending', 'Draft']
     >;
     slug: Schema.Attribute.UID<'name'>;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1317,6 +1319,33 @@ export interface ApiSubscribeSubscribe extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Struct.CollectionTypeSchema {
+  collectionName: 'tags';
+  info: {
+    displayName: 'Tag';
+    pluralName: 'tags';
+    singularName: 'tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
+    slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1868,6 +1897,7 @@ declare module '@strapi/strapi' {
       'api::setting.setting': ApiSettingSetting;
       'api::state.state': ApiStateState;
       'api::subscribe.subscribe': ApiSubscribeSubscribe;
+      'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
