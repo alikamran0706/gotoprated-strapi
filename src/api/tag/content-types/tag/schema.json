@@ -24,9 +24,9 @@
       "target": "api::service.service",
       "mappedBy": "tags"
     },
-    "company": {
+    "companies": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::company.company",
       "inversedBy": "tags"
     }

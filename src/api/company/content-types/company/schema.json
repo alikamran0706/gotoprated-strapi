@@ -90,9 +90,9 @@
     },
     "tags": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::tag.tag",
-      "mappedBy": "company"
+      "mappedBy": "companies"
     }
   }
 }

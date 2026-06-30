@@ -807,7 +807,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
-    tags: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;
+    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1385,7 +1385,7 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
+    companies: Schema.Attribute.Relation<'manyToMany', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
