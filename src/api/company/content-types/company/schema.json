@@ -87,6 +87,12 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "mappedBy": "companies"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "company"
     }
   }
 }
