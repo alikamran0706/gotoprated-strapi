@@ -487,7 +487,13 @@ export interface ApiCategoryContentCategoryContent
   };
   attributes: {
     area: Schema.Attribute.Relation<'manyToOne', 'api::area.area'>;
-    banner: Schema.Attribute.RichText;
+    banner: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
     content: Schema.Attribute.RichText &
