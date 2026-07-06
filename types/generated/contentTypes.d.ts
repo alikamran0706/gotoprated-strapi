@@ -504,6 +504,7 @@ export interface ApiCategoryContentCategoryContent
     description: Schema.Attribute.Text;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
     header: Schema.Attribute.Text;
+    isCity: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
