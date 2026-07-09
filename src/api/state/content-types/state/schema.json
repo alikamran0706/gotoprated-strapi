@@ -54,6 +54,12 @@
     },
     "description": {
       "type": "text"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "states"
     }
   }
 }
