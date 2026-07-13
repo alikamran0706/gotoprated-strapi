@@ -1013,8 +1013,6 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    adult_count: Schema.Attribute.Integer;
-    child_count: Schema.Attribute.Integer;
     company_location: Schema.Attribute.Relation<
       'manyToOne',
       'api::company-location.company-location'
@@ -1023,9 +1021,9 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    departure_city: Schema.Attribute.String;
     email: Schema.Attribute.Email;
     full_name: Schema.Attribute.String;
+    is_read: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1033,28 +1031,9 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     message: Schema.Attribute.Text;
-    nationality: Schema.Attribute.String;
     phone: Schema.Attribute.String;
-    planned_month: Schema.Attribute.Enumeration<
-      [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December ',
-      ]
-    >;
-    preferred_start_date: Schema.Attribute.Date;
     publishedAt: Schema.Attribute.DateTime;
     source: Schema.Attribute.String;
-    stay_duration_days: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
