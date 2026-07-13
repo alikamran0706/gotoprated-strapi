@@ -31,6 +31,10 @@
         "audios"
       ]
     },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    },
     "country": {
       "type": "relation",
       "relation": "manyToOne",

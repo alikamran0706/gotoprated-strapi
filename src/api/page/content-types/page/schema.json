@@ -10,6 +10,7 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string"
@@ -24,12 +25,16 @@
     "meta_description": {
       "type": "string"
     },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    },
     "content": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      },
-      "customField": "plugin::ckeditor5.CKEditor"
+      }
     }
   }
 }
