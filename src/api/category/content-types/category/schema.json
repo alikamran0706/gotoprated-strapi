@@ -37,6 +37,10 @@
         "audios"
       ]
     },
+    "is_interior": {
+      "type": "boolean",
+      "default": false
+    },
     "is_active": {
       "type": "boolean",
       "default": false
