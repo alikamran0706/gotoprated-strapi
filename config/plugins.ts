@@ -42,7 +42,7 @@ module.exports = ({ env }) => ({
     "users-permissions": {
         config: {
             register: {
-                allowedFields: ["user_type", "first_name", "last_name", "address", "phone"],
+                allowedFields: ["user_type", "first_name", "last_name", "address", "phone", "company"],
                 validation: {
                     user_type: {
                         enum: ["partner", "user"],
