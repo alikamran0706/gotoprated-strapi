@@ -2,7 +2,7 @@ export default ({ env }) => ({
   auth: {
     secret: env('ADMIN_JWT_SECRET'),
     resetPassword: {
-      url: `${env('BACKEND_URL', 'https://production.flykaaba.com')}/auth/reset-password`,
+      url: `${env('BACKEND_URL', 'http://y11r02bk4czqfk5rmmbs7xax.5.78.100.153.sslip.io')}/auth/reset-password`,
     },
   },
   apiToken: {

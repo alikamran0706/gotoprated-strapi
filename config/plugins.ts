@@ -45,7 +45,7 @@ module.exports = ({ env }) => ({
                 allowedFields: ["user_type", "first_name", "last_name", "address", "phone", "company"],
                 validation: {
                     user_type: {
-                        enum: ["partner", "user"],
+                        enum: ["agency", "user", 'admin', 'blogger'],
                     },
                     first_name: {
                         minLength: 1,
