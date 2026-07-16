@@ -6,5 +6,5 @@ export default ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  url: env('BACKEND_URL', 'http://y11r02bk4czqfk5rmmbs7xax.5.78.100.153.sslip.io'),
+  url: env('BACKEND_URL', 'http://cfr1jp25cz1altwthve7xjs0.5.78.100.153.sslip.io'),
 });
