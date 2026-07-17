@@ -44,6 +44,12 @@
     "is_read": {
       "type": "boolean",
       "default": false
+    },
+    "email_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::email-log.email-log",
+      "mappedBy": "inquiry"
     }
   }
 }

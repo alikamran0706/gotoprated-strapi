@@ -46,6 +46,12 @@
       "relation": "manyToOne",
       "target": "api::company.company",
       "inversedBy": "reviews"
+    },
+    "email_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::email-log.email-log",
+      "mappedBy": "review"
     }
   }
 }

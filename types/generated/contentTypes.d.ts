@@ -872,6 +872,10 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    email_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::email-log.email-log'
+    >;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
     is_verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -947,6 +951,69 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEmailLogEmailLog extends Struct.CollectionTypeSchema {
+  collectionName: 'email_logs';
+  info: {
+    displayName: 'Email Log';
+    pluralName: 'email-logs';
+    singularName: 'email-log';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
+    content_preview: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email_log_status: Schema.Attribute.Enumeration<
+      ['pending', 'sent', 'failed ', 'bounced', 'opened']
+    >;
+    email_type: Schema.Attribute.Enumeration<
+      [
+        'company_pending',
+        'company_approved',
+        'company_reject',
+        'inquiry_reply',
+        'review_notification',
+        'password_reset',
+        'newsletter',
+        'contact_form',
+        'registration',
+      ]
+    >;
+    error_message: Schema.Attribute.Text;
+    inquiry: Schema.Attribute.Relation<'manyToOne', 'api::inquiry.inquiry'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::email-log.email-log'
+    > &
+      Schema.Attribute.Private;
+    metadata: Schema.Attribute.JSON;
+    opened_at: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    recipient: Schema.Attribute.Email & Schema.Attribute.Required;
+    recipient_name: Schema.Attribute.String;
+    review: Schema.Attribute.Relation<'manyToOne', 'api::review.review'>;
+    subject: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1094,6 +1161,10 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email;
+    email_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::email-log.email-log'
+    >;
     full_name: Schema.Attribute.String;
     is_read: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1203,6 +1274,10 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    email_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::email-log.email-log'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1939,6 +2014,10 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    email_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::email-log.email-log'
+    >;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
     first_name: Schema.Attribute.String;
     inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
@@ -2001,6 +2080,7 @@ declare module '@strapi/strapi' {
       'api::company-location.company-location': ApiCompanyLocationCompanyLocation;
       'api::company.company': ApiCompanyCompany;
       'api::country.country': ApiCountryCountry;
+      'api::email-log.email-log': ApiEmailLogEmailLog;
       'api::email-template.email-template': ApiEmailTemplateEmailTemplate;
       'api::faq.faq': ApiFaqFaq;
       'api::geo-content.geo-content': ApiGeoContentGeoContent;

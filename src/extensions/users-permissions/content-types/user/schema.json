@@ -126,6 +126,12 @@
       "relation": "oneToOne",
       "target": "api::company.company",
       "inversedBy": "user"
+    },
+    "email_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::email-log.email-log",
+      "mappedBy": "user"
     }
   }
 }

@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "email_logs",
+  "info": {
+    "singularName": "email-log",
+    "pluralName": "email-logs",
+    "displayName": "Email Log"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "recipient": {
+      "type": "email",
+      "required": true
+    },
+    "recipient_name": {
+      "type": "string"
+    },
+    "email_type": {
+      "type": "enumeration",
+      "enum": [
+        "company_pending",
+        "company_approved",
+        "company_reject",
+        "inquiry_reply",
+        "review_notification",
+        "password_reset",
+        "newsletter",
+        "contact_form",
+        "registration"
+      ]
+    },
+    "email_log_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "sent",
+        "failed ",
+        "bounced",
+        "opened"
+      ]
+    },
+    "subject": {
+      "type": "text"
+    },
+    "opened_at": {
+      "type": "datetime"
+    },
+    "error_message": {
+      "type": "text"
+    },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "email_logs"
+    },
+    "inquiry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::inquiry.inquiry",
+      "inversedBy": "email_logs"
+    },
+    "review": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::review.review",
+      "inversedBy": "email_logs"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "email_logs"
+    },
+    "metadata": {
+      "type": "json"
+    },
+    "content_preview": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    }
+  }
+}
