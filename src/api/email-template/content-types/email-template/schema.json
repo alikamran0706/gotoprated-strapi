@@ -30,6 +30,15 @@
       "options": {
         "preset": "defaultHtml"
       }
+    },
+    "email_type": {
+      "type": "enumeration",
+      "enum": [
+        "user",
+        "company",
+        "review",
+        "inquiry"
+      ]
     }
   }
 }
