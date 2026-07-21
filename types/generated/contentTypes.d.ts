@@ -1345,13 +1345,11 @@ export interface ApiServiceContentServiceContent
         }
       >;
     country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
-    features: Schema.Attribute.JSON;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -1362,6 +1360,7 @@ export interface ApiServiceContentServiceContent
       'api::service-content.service-content'
     > &
       Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
