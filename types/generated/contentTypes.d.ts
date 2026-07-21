@@ -616,6 +616,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     is_interior: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -627,6 +628,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
     type: Schema.Attribute.Enumeration<['Primary', 'Secondary', 'Addon']>;
@@ -877,6 +879,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'api::email-log.email-log'
     >;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
     is_verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1040,8 +1043,9 @@ export interface ApiEmailTemplateEmailTemplate
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email_type: Schema.Attribute.Enumeration<
-      ['user', 'company', 'review', 'inquiry']
-    >;
+      ['general', 'user', 'company', 'review', 'inquiry']
+    > &
+      Schema.Attribute.DefaultTo<'general'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1071,6 +1075,7 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   };
   attributes: {
     answer: Schema.Attribute.Text;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     category_content: Schema.Attribute.Relation<
       'manyToOne',
       'api::category-content.category-content'
@@ -1155,6 +1160,7 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     company_location: Schema.Attribute.Relation<
       'manyToOne',
       'api::company-location.company-location'
@@ -1272,6 +1278,7 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
   };
   attributes: {
     approved: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1280,6 +1287,10 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
     email_logs: Schema.Attribute.Relation<
       'oneToMany',
       'api::email-log.email-log'
+    >;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

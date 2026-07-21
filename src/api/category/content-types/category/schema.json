@@ -62,6 +62,18 @@
       "relation": "manyToMany",
       "target": "api::company.company",
       "inversedBy": "categories"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "category"
+    },
+    "faqs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::faq.faq",
+      "mappedBy": "category"
     }
   }
 }

@@ -46,6 +46,12 @@
       "relation": "manyToOne",
       "target": "api::category-content.category-content",
       "inversedBy": "faqs"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "faqs"
     }
   }
 }

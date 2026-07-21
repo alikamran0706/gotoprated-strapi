@@ -35,6 +35,12 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "inquiries"
     },
+    "company": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::company.company",
+      "inversedBy": "inquiries"
+    },
     "company_location": {
       "type": "relation",
       "relation": "manyToOne",

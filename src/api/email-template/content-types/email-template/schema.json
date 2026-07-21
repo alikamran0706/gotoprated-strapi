@@ -24,21 +24,23 @@
     "subject": {
       "type": "string"
     },
+    "email_type": {
+      "type": "enumeration",
+      "default": "general",
+      "enum": [
+        "general",
+        "user",
+        "company",
+        "review",
+        "inquiry"
+      ]
+    },
     "body": {
       "type": "customField",
       "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
       }
-    },
-    "email_type": {
-      "type": "enumeration",
-      "enum": [
-        "user",
-        "company",
-        "review",
-        "inquiry"
-      ]
     }
   }
 }
