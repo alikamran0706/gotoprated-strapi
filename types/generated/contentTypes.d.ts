@@ -463,10 +463,6 @@ export interface ApiAreaArea extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    service_contents: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service-content.service-content'
-    >;
     slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -626,7 +622,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       'api::category.category'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
@@ -712,10 +708,6 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    service_contents: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service-content.service-content'
-    >;
     slug: Schema.Attribute.UID<'name'>;
     ss: Schema.Attribute.String;
     state: Schema.Attribute.Relation<'manyToOne', 'api::state.state'>;
@@ -902,6 +894,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    views: Schema.Attribute.Integer;
   };
 }
 
@@ -945,10 +938,6 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    service_contents: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service-content.service-content'
-    >;
     slug: Schema.Attribute.UID<'name'>;
     states: Schema.Attribute.Relation<'oneToMany', 'api::state.state'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -1097,10 +1086,7 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     question: Schema.Attribute.Text;
-    service_content: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::service-content.service-content'
-    >;
+    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1308,10 +1294,7 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
         number
       > &
       Schema.Attribute.DefaultTo<0>;
-    service_content: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::service-content.service-content'
-    >;
+    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1320,56 +1303,6 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-  };
-}
-
-export interface ApiServiceContentServiceContent
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'service_contents';
-  info: {
-    displayName: 'Service Content';
-    pluralName: 'service-contents';
-    singularName: 'service-content';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    area: Schema.Attribute.Relation<'manyToOne', 'api::area.area'>;
-    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
-    content: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
-    country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
-    gallery: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service-content.service-content'
-    > &
-      Schema.Attribute.Private;
-    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
-    price: Schema.Attribute.Decimal;
-    publishedAt: Schema.Attribute.DateTime;
-    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
-    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -1384,7 +1317,6 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    base_price: Schema.Attribute.Decimal;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
@@ -1392,20 +1324,22 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     duration_minutes: Schema.Attribute.Integer;
-    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    gallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::service.service'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    name: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     rejection_reason: Schema.Attribute.Text;
-    service_contents: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service-content.service-content'
-    >;
+    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     service_status: Schema.Attribute.Enumeration<
       ['Reject', 'Verified', 'Pending', 'Draft']
     >;
@@ -1414,7 +1348,6 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    views: Schema.Attribute.Integer;
   };
 }
 
@@ -2101,7 +2034,6 @@ declare module '@strapi/strapi' {
       'api::message.message': ApiMessageMessage;
       'api::page.page': ApiPagePage;
       'api::review.review': ApiReviewReview;
-      'api::service-content.service-content': ApiServiceContentServiceContent;
       'api::service.service': ApiServiceService;
       'api::setting.setting': ApiSettingSetting;
       'api::state.state': ApiStateState;

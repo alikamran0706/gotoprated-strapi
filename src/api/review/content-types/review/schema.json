@@ -45,12 +45,6 @@
         "audios"
       ]
     },
-    "service_content": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::service-content.service-content",
-      "inversedBy": "reviews"
-    },
     "company": {
       "type": "relation",
       "relation": "manyToOne",
@@ -67,6 +61,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
+      "inversedBy": "reviews"
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
       "inversedBy": "reviews"
     }
   }

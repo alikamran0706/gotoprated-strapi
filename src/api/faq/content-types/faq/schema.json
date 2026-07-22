@@ -29,12 +29,6 @@
       "target": "api::geo-content.geo-content",
       "inversedBy": "faqs"
     },
-    "service_content": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::service-content.service-content",
-      "inversedBy": "faqs"
-    },
     "company": {
       "type": "relation",
       "relation": "manyToOne",
@@ -51,6 +45,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
+      "inversedBy": "faqs"
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
       "inversedBy": "faqs"
     }
   }

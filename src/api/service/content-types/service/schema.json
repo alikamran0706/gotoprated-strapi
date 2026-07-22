@@ -12,7 +12,7 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "text"
     },
     "slug": {
       "type": "uid",
@@ -21,8 +21,15 @@
     "description": {
       "type": "text"
     },
-    "base_price": {
-      "type": "decimal"
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "duration_minutes": {
       "type": "integer"
@@ -45,19 +52,6 @@
     "rejection_reason": {
       "type": "text"
     },
-    "views": {
-      "type": "integer"
-    },
-    "featured": {
-      "type": "boolean",
-      "default": false
-    },
-    "service_contents": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::service-content.service-content",
-      "mappedBy": "service"
-    },
     "company": {
       "type": "relation",
       "relation": "manyToOne",
@@ -69,6 +63,28 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "services"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "service"
+    },
+    "faqs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::faq.faq",
+      "mappedBy": "service"
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

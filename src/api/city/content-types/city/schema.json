@@ -70,12 +70,6 @@
       "target": "api::category-content.category-content",
       "mappedBy": "city"
     },
-    "service_contents": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::service-content.service-content",
-      "mappedBy": "city"
-    },
     "company_locations": {
       "type": "relation",
       "relation": "oneToMany",

@@ -105,6 +105,9 @@
       "relation": "oneToMany",
       "target": "api::inquiry.inquiry",
       "mappedBy": "company"
+    },
+    "views": {
+      "type": "integer"
     }
   }
 }
