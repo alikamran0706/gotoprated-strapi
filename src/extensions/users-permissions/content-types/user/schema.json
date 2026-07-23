@@ -91,7 +91,7 @@
         "agency",
         "user",
         "admin",
-        "superadmin"
+        "blogger"
       ]
     },
     "inquiries": {
@@ -132,6 +132,12 @@
       "relation": "oneToMany",
       "target": "api::email-log.email-log",
       "mappedBy": "user"
+    },
+    "blogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog.blog",
+      "mappedBy": "author"
     }
   }
 }

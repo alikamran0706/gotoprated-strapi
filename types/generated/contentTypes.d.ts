@@ -512,6 +512,10 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    author: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     blog_categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::blog-category.blog-category'
@@ -1947,6 +1951,7 @@ export interface PluginUsersPermissionsUser
     address: Schema.Attribute.String;
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     chats: Schema.Attribute.Relation<'oneToMany', 'api::chat.chat'>;
     company: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
@@ -1991,7 +1996,7 @@ export interface PluginUsersPermissionsUser
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     user_type: Schema.Attribute.Enumeration<
-      ['agency', 'user', 'admin', 'superadmin']
+      ['agency', 'user', 'admin', 'blogger']
     > &
       Schema.Attribute.DefaultTo<'user'>;
     username: Schema.Attribute.String &
