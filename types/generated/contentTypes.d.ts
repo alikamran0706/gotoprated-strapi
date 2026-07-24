@@ -520,6 +520,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::blog-category.blog-category'
     >;
+    blog_status: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     content: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
@@ -538,6 +539,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'>;
+    tags: Schema.Attribute.Text;
     title: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -608,18 +610,33 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    banner: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    cat_type: Schema.Attribute.Enumeration<['Interior', 'Exterior']>;
     category_contents: Schema.Attribute.Relation<
       'oneToMany',
       'api::category-content.category-content'
     >;
     companies: Schema.Attribute.Relation<'manyToMany', 'api::company.company'>;
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    is_interior: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -631,6 +648,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
+    tagline: Schema.Attribute.Text;
     type: Schema.Attribute.Enumeration<['Primary', 'Secondary', 'Addon']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

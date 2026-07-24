@@ -54,6 +54,13 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "blogs"
+    },
+    "blog_status": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "text"
     }
   }
 }

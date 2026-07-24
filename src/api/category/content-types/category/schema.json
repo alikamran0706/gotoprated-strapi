@@ -15,6 +15,19 @@
     "name": {
       "type": "text"
     },
+    "tagline": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "slug": {
       "type": "uid",
       "targetField": "name"
@@ -36,10 +49,6 @@
         "videos",
         "audios"
       ]
-    },
-    "is_interior": {
-      "type": "boolean",
-      "default": false
     },
     "is_active": {
       "type": "boolean",
@@ -74,6 +83,32 @@
       "relation": "oneToMany",
       "target": "api::faq.faq",
       "mappedBy": "category"
+    },
+    "cat_type": {
+      "type": "enumeration",
+      "enum": [
+        "Interior",
+        "Exterior"
+      ]
+    },
+    "banner": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "content": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "meta_tags": {
+      "type": "component",
+      "component": "banner.meta-tags",
+      "repeatable": false
     }
   }
 }
