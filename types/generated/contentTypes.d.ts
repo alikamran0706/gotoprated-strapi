@@ -643,6 +643,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       'api::category.category'
     > &
       Schema.Attribute.Private;
+    meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     name: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
