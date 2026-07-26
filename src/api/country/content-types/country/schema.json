@@ -59,16 +59,16 @@
       "target": "api::category-content.category-content",
       "mappedBy": "country"
     },
-    "company_locations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::company-location.company-location",
-      "mappedBy": "country"
-    },
     "states": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::state.state",
+      "mappedBy": "country"
+    },
+    "companies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company.company",
       "mappedBy": "country"
     }
   }

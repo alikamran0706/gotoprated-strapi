@@ -64,6 +64,12 @@
     },
     "description": {
       "type": "text"
+    },
+    "companies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company.company",
+      "mappedBy": "state"
     }
   }
 }

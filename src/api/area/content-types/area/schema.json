@@ -40,10 +40,10 @@
       "target": "api::category-content.category-content",
       "mappedBy": "area"
     },
-    "company_locations": {
+    "companies": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::company-location.company-location",
+      "target": "api::company.company",
       "mappedBy": "area"
     }
   }
