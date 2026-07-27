@@ -446,10 +446,7 @@ export interface ApiAreaArea extends Struct.CollectionTypeSchema {
       'api::category-content.category-content'
     >;
     city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
-    company_locations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::company-location.company-location'
-    >;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -712,10 +709,7 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::category-content.category-content'
     >;
-    company_locations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::company-location.company-location'
-    >;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -815,51 +809,6 @@ export interface ApiCompanyContentCompanyContent
   };
 }
 
-export interface ApiCompanyLocationCompanyLocation
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'company_locations';
-  info: {
-    displayName: 'Company Location';
-    pluralName: 'company-locations';
-    singularName: 'company-location';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    address: Schema.Attribute.String;
-    area: Schema.Attribute.Relation<'manyToOne', 'api::area.area'>;
-    buisness_hours: Schema.Attribute.JSON;
-    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
-    company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
-    country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    iata: Schema.Attribute.String;
-    inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
-    is_primary: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    lat: Schema.Attribute.Decimal;
-    lng: Schema.Attribute.Decimal;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::company-location.company-location'
-    > &
-      Schema.Attribute.Private;
-    phone: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    social_links: Schema.Attribute.JSON;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    website: Schema.Attribute.String;
-    years_in_business: Schema.Attribute.Decimal;
-    zip_code: Schema.Attribute.String;
-  };
-}
-
 export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
   collectionName: 'companies';
   info: {
@@ -871,40 +820,37 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    allow_email: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    author_review: Schema.Attribute.Text;
+    address: Schema.Attribute.String;
+    area: Schema.Attribute.Relation<'manyToOne', 'api::area.area'>;
+    buisness_hours: Schema.Attribute.JSON;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
     >;
+    city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
     company_content: Schema.Attribute.Relation<
       'oneToOne',
       'api::company-content.company-content'
     >;
-    company_locations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::company-location.company-location'
-    >;
     company_status: Schema.Attribute.Enumeration<
       ['Pending', 'Approved', 'Reject']
     >;
-    contact_person_designation: Schema.Attribute.Enumeration<
-      ['Owner', 'Manager', 'CEO', 'Marketer']
-    >;
-    contact_person_email: Schema.Attribute.Email;
-    contact_person_name: Schema.Attribute.String;
-    contact_person_phone: Schema.Attribute.String;
+    country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    email: Schema.Attribute.Email;
     email_logs: Schema.Attribute.Relation<
       'oneToMany',
       'api::email-log.email-log'
     >;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    iata: Schema.Attribute.String;
     inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
     is_verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    lat: Schema.Attribute.Decimal;
+    lng: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -913,11 +859,14 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     rejection_reason: Schema.Attribute.Text;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
+    social_links: Schema.Attribute.JSON;
+    state: Schema.Attribute.Relation<'manyToOne', 'api::state.state'>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -927,6 +876,9 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'plugin::users-permissions.user'
     >;
     views: Schema.Attribute.Integer;
+    website: Schema.Attribute.String;
+    years_in_business: Schema.Attribute.Integer;
+    zip_code: Schema.Attribute.String;
   };
 }
 
@@ -946,10 +898,7 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
       'api::category-content.category-content'
     >;
     cities: Schema.Attribute.Relation<'oneToMany', 'api::city.city'>;
-    company_locations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::company-location.company-location'
-    >;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     country_code: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1179,10 +1128,6 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
   };
   attributes: {
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
-    company_location: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::company-location.company-location'
-    >;
     countryCode: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1433,6 +1378,7 @@ export interface ApiStateState extends Struct.CollectionTypeSchema {
   };
   attributes: {
     cities: Schema.Attribute.Relation<'oneToMany', 'api::city.city'>;
+    companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
     content: Schema.Attribute.RichText &
       Schema.Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
@@ -2056,7 +2002,6 @@ declare module '@strapi/strapi' {
       'api::city.city': ApiCityCity;
       'api::click-target.click-target': ApiClickTargetClickTarget;
       'api::company-content.company-content': ApiCompanyContentCompanyContent;
-      'api::company-location.company-location': ApiCompanyLocationCompanyLocation;
       'api::company.company': ApiCompanyCompany;
       'api::country.country': ApiCountryCountry;
       'api::email-log.email-log': ApiEmailLogEmailLog;

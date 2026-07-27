@@ -46,12 +46,6 @@
     "rejection_reason": {
       "type": "text"
     },
-    "company_locations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::company-location.company-location",
-      "mappedBy": "company"
-    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
@@ -109,30 +103,62 @@
     "views": {
       "type": "integer"
     },
-    "contact_person_name": {
-      "type": "string"
-    },
-    "contact_person_email": {
+    "email": {
       "type": "email"
     },
-    "contact_person_phone": {
+    "phone": {
       "type": "string"
     },
-    "contact_person_designation": {
-      "type": "enumeration",
-      "enum": [
-        "Owner",
-        "Manager",
-        "CEO",
-        "Marketer"
-      ]
+    "website": {
+      "type": "string"
     },
-    "author_review": {
-      "type": "text"
+    "address": {
+      "type": "string"
     },
-    "allow_email": {
-      "type": "boolean",
-      "default": true
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "companies"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "companies"
+    },
+    "state": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::state.state",
+      "inversedBy": "companies"
+    },
+    "area": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::area.area",
+      "inversedBy": "companies"
+    },
+    "zip_code": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "decimal"
+    },
+    "lng": {
+      "type": "decimal"
+    },
+    "years_in_business": {
+      "type": "integer"
+    },
+    "iata": {
+      "type": "string"
+    },
+    "buisness_hours": {
+      "type": "json"
+    },
+    "social_links": {
+      "type": "json"
     }
   }
 }
