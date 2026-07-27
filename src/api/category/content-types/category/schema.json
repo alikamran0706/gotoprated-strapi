@@ -112,6 +112,12 @@
       "type": "component",
       "component": "banner.meta-tags",
       "repeatable": false
+    },
+    "company_locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::company-location.company-location",
+      "mappedBy": "categories"
     }
   }
 }

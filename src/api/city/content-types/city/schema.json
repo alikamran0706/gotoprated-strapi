@@ -75,6 +75,12 @@
       "relation": "oneToMany",
       "target": "api::company.company",
       "mappedBy": "city"
+    },
+    "company_locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company-location.company-location",
+      "mappedBy": "city"
     }
   }
 }

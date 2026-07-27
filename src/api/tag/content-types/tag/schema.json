@@ -23,12 +23,6 @@
       "relation": "manyToMany",
       "target": "api::service.service",
       "mappedBy": "tags"
-    },
-    "companies": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::company.company",
-      "inversedBy": "tags"
     }
   }
 }

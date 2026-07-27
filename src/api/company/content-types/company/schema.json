@@ -82,12 +82,6 @@
       "target": "api::category.category",
       "mappedBy": "companies"
     },
-    "tags": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tag.tag",
-      "mappedBy": "companies"
-    },
     "email_logs": {
       "type": "relation",
       "relation": "oneToMany",
@@ -159,6 +153,44 @@
     },
     "social_links": {
       "type": "json"
+    },
+    "rating_count": {
+      "type": "integer"
+    },
+    "long_desc": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "contact_person_name": {
+      "type": "string"
+    },
+    "contact_person_email": {
+      "type": "email"
+    },
+    "contact_person_designation": {
+      "type": "enumeration",
+      "enum": [
+        "Owner",
+        " Manager",
+        "CEO",
+        "Marketer"
+      ]
+    },
+    "author_review": {
+      "type": "text"
+    },
+    "allow_email": {
+      "type": "boolean",
+      "default": true
+    },
+    "company_locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company-location.company-location",
+      "mappedBy": "company"
     }
   }
 }
