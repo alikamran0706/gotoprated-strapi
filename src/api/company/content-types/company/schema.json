@@ -108,6 +108,31 @@
     },
     "views": {
       "type": "integer"
+    },
+    "contact_person_name": {
+      "type": "string"
+    },
+    "contact_person_email": {
+      "type": "email"
+    },
+    "contact_person_phone": {
+      "type": "string"
+    },
+    "contact_person_designation": {
+      "type": "enumeration",
+      "enum": [
+        "Owner",
+        "Manager",
+        "CEO",
+        "Marketer"
+      ]
+    },
+    "author_review": {
+      "type": "text"
+    },
+    "allow_email": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

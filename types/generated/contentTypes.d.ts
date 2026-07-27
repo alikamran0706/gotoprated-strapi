@@ -633,6 +633,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
     icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -870,6 +871,8 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    allow_email: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    author_review: Schema.Attribute.Text;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
@@ -885,6 +888,12 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     company_status: Schema.Attribute.Enumeration<
       ['Pending', 'Approved', 'Reject']
     >;
+    contact_person_designation: Schema.Attribute.Enumeration<
+      ['Owner', 'Manager', 'CEO', 'Marketer']
+    >;
+    contact_person_email: Schema.Attribute.Email;
+    contact_person_name: Schema.Attribute.String;
+    contact_person_phone: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
