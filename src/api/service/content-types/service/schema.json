@@ -52,16 +52,20 @@
     "rejection_reason": {
       "type": "text"
     },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "company": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::company.company",
-      "inversedBy": "services"
-    },
-    "tags": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tag.tag",
       "inversedBy": "services"
     },
     "reviews": {
@@ -76,15 +80,8 @@
       "target": "api::faq.faq",
       "mappedBy": "service"
     },
-    "gallery": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "tags": {
+      "type": "text"
     }
   }
 }

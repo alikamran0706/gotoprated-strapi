@@ -17,12 +17,6 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
-    },
-    "services": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::service.service",
-      "mappedBy": "tags"
     }
   }
 }

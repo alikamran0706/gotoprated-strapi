@@ -934,6 +934,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.UID<'name'>;
     social_links: Schema.Attribute.JSON;
     state: Schema.Attribute.Relation<'manyToOne', 'api::state.state'>;
+    tags: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1394,7 +1395,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       ['Reject', 'Verified', 'Pending', 'Draft']
     >;
     slug: Schema.Attribute.UID<'name'>;
-    tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
+    tags: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1528,7 +1529,6 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

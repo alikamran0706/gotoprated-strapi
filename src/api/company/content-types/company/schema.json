@@ -142,6 +142,9 @@
     "lng": {
       "type": "decimal"
     },
+    "tags": {
+      "type": "text"
+    },
     "years_in_business": {
       "type": "integer"
     },
