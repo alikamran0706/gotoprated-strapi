@@ -194,6 +194,11 @@
       "relation": "oneToMany",
       "target": "api::company-location.company-location",
       "mappedBy": "company"
+    },
+    "meta_tags": {
+      "type": "component",
+      "component": "banner.meta-tags",
+      "repeatable": false
     }
   }
 }

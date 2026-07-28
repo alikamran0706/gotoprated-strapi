@@ -27,11 +27,6 @@
         "audios"
       ]
     },
-    "meta_tags": {
-      "type": "component",
-      "component": "banner.meta-tags",
-      "repeatable": false
-    },
     "content": {
       "type": "customField",
       "customField": "plugin::ckeditor5.CKEditor",

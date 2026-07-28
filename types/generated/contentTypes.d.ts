@@ -813,7 +813,6 @@ export interface ApiCompanyContentCompanyContent
       'api::company-content.company-content'
     > &
       Schema.Attribute.Private;
-    meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -924,6 +923,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
           preset: 'defaultHtml';
         }
       >;
+    meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     name: Schema.Attribute.String;
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
