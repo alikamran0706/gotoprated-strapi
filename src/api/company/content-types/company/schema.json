@@ -177,7 +177,7 @@
       "type": "enumeration",
       "enum": [
         "Owner",
-        " Manager",
+        "Manager",
         "CEO",
         "Marketer"
       ]
