@@ -70,12 +70,6 @@
       "target": "api::service.service",
       "mappedBy": "company"
     },
-    "company_content": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::company-content.company-content",
-      "mappedBy": "company"
-    },
     "categories": {
       "type": "relation",
       "relation": "manyToMany",
@@ -194,6 +188,16 @@
       "relation": "oneToMany",
       "target": "api::company-location.company-location",
       "mappedBy": "company"
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "meta_tags": {
       "type": "component",
