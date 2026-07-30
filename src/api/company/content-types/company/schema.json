@@ -203,6 +203,10 @@
       "type": "component",
       "component": "banner.meta-tags",
       "repeatable": false
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

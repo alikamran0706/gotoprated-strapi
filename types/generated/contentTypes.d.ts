@@ -803,6 +803,7 @@ export interface ApiCompanyLocationCompanyLocation
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     list_level: Schema.Attribute.Enumeration<['Featured', 'Headline', 'Free']>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -811,6 +812,7 @@ export interface ApiCompanyLocationCompanyLocation
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -861,6 +863,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'api::email-log.email-log'
     >;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -1335,6 +1338,10 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   attributes: {
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
+    company_locations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::company-location.company-location'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

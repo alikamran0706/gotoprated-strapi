@@ -48,6 +48,16 @@
         "Headline",
         "Free"
       ]
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "company_locations"
     }
   }
 }
