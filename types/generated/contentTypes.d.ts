@@ -839,6 +839,7 @@ export interface ApiCompanyLocationCompanyLocation
     >;
     city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
     company: Schema.Attribute.Relation<'manyToOne', 'api::company.company'>;
+    country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -889,7 +890,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       ['Pending', 'Approved', 'Reject']
     >;
     contact_person_designation: Schema.Attribute.Enumeration<
-      ['Owner', ' Manager', 'CEO', 'Marketer']
+      ['Owner', 'Manager', 'CEO', 'Marketer']
     >;
     contact_person_email: Schema.Attribute.Email;
     contact_person_name: Schema.Attribute.String;
@@ -966,6 +967,10 @@ export interface ApiCountryCountry extends Struct.CollectionTypeSchema {
     >;
     cities: Schema.Attribute.Relation<'oneToMany', 'api::city.city'>;
     companies: Schema.Attribute.Relation<'oneToMany', 'api::company.company'>;
+    company_locations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::company-location.company-location'
+    >;
     country_code: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

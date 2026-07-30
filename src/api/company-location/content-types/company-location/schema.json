@@ -11,6 +11,12 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "company_locations"
+    },
     "city": {
       "type": "relation",
       "relation": "manyToOne",

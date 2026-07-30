@@ -70,6 +70,12 @@
       "relation": "oneToMany",
       "target": "api::company.company",
       "mappedBy": "country"
+    },
+    "company_locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::company-location.company-location",
+      "mappedBy": "country"
     }
   }
 }
