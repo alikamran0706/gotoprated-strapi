@@ -780,46 +780,6 @@ export interface ApiClickTargetClickTarget extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCompanyContentCompanyContent
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'company_contents';
-  info: {
-    displayName: 'Company Content';
-    pluralName: 'company-contents';
-    singularName: 'company-content';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    company: Schema.Attribute.Relation<'oneToOne', 'api::company.company'>;
-    content: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    gallery: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::company-content.company-content'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiCompanyLocationCompanyLocation
   extends Struct.CollectionTypeSchema {
   collectionName: 'company_locations';
@@ -878,10 +838,6 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'api::category.category'
     >;
     city: Schema.Attribute.Relation<'manyToOne', 'api::city.city'>;
-    company_content: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::company-content.company-content'
-    >;
     company_locations: Schema.Attribute.Relation<
       'oneToMany',
       'api::company-location.company-location'
@@ -905,6 +861,10 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
       'api::email-log.email-log'
     >;
     faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    gallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     iata: Schema.Attribute.String;
     inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
     is_verified: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -2078,7 +2038,6 @@ declare module '@strapi/strapi' {
       'api::chat.chat': ApiChatChat;
       'api::city.city': ApiCityCity;
       'api::click-target.click-target': ApiClickTargetClickTarget;
-      'api::company-content.company-content': ApiCompanyContentCompanyContent;
       'api::company-location.company-location': ApiCompanyLocationCompanyLocation;
       'api::company.company': ApiCompanyCompany;
       'api::country.country': ApiCountryCountry;
