@@ -40,18 +40,6 @@
       "target": "api::category.category",
       "inversedBy": "services"
     },
-    "service_status": {
-      "type": "enumeration",
-      "enum": [
-        "Reject",
-        "Verified",
-        "Pending",
-        "Draft"
-      ]
-    },
-    "rejection_reason": {
-      "type": "text"
-    },
     "gallery": {
       "type": "media",
       "multiple": true,
@@ -88,6 +76,15 @@
       "relation": "oneToMany",
       "target": "api::company-location.company-location",
       "mappedBy": "service"
+    },
+    "meta_tags": {
+      "type": "component",
+      "component": "banner.meta-tags",
+      "repeatable": false
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

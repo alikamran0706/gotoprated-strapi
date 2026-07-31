@@ -1352,6 +1352,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1359,13 +1360,10 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     name: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
-    rejection_reason: Schema.Attribute.Text;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
-    service_status: Schema.Attribute.Enumeration<
-      ['Reject', 'Verified', 'Pending', 'Draft']
-    >;
     slug: Schema.Attribute.UID<'name'>;
     tags: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
