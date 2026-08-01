@@ -145,7 +145,7 @@
     "iata": {
       "type": "string"
     },
-    "buisness_hours": {
+    "business_hours": {
       "type": "json"
     },
     "social_links": {
