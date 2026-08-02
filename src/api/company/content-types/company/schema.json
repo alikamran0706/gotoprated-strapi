@@ -148,6 +148,10 @@
     "business_hours": {
       "type": "json"
     },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
     "social_links": {
       "type": "json"
     },
@@ -176,12 +180,25 @@
         "Marketer"
       ]
     },
+    "contact_person_Description": {
+      "type": "text"
+    },
     "author_review": {
       "type": "text"
     },
     "allow_email": {
       "type": "boolean",
       "default": true
+    },
+    "contact_person_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "company_locations": {
       "type": "relation",
@@ -203,10 +220,6 @@
       "type": "component",
       "component": "banner.meta-tags",
       "repeatable": false
-    },
-    "featured": {
-      "type": "boolean",
-      "default": false
     }
   }
 }

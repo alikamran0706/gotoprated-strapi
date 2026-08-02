@@ -834,7 +834,7 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     allow_email: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     area: Schema.Attribute.Relation<'manyToOne', 'api::area.area'>;
     author_review: Schema.Attribute.Text;
-    buisness_hours: Schema.Attribute.JSON;
+    business_hours: Schema.Attribute.JSON;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
@@ -847,10 +847,14 @@ export interface ApiCompanyCompany extends Struct.CollectionTypeSchema {
     company_status: Schema.Attribute.Enumeration<
       ['Pending', 'Approved', 'Reject']
     >;
+    contact_person_Description: Schema.Attribute.Text;
     contact_person_designation: Schema.Attribute.Enumeration<
       ['Owner', 'Manager', 'CEO', 'Marketer']
     >;
     contact_person_email: Schema.Attribute.Email;
+    contact_person_image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     contact_person_name: Schema.Attribute.String;
     country: Schema.Attribute.Relation<'manyToOne', 'api::country.country'>;
     createdAt: Schema.Attribute.DateTime;
