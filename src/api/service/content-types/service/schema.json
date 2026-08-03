@@ -85,6 +85,9 @@
     "is_active": {
       "type": "boolean",
       "default": true
+    },
+    "price": {
+      "type": "decimal"
     }
   }
 }

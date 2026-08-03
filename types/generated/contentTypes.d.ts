@@ -1366,6 +1366,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     meta_tags: Schema.Attribute.Component<'banner.meta-tags', false>;
     name: Schema.Attribute.Text;
+    price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     slug: Schema.Attribute.UID<'name'>;
