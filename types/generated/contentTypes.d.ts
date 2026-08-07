@@ -1193,7 +1193,12 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     message: Schema.Attribute.Text;
     phone: Schema.Attribute.String;
+    priority: Schema.Attribute.Enumeration<
+      ['Urgent', 'Important', 'Normal', 'Low']
+    > &
+      Schema.Attribute.DefaultTo<'Normal'>;
     publishedAt: Schema.Attribute.DateTime;
+    service: Schema.Attribute.Relation<'manyToOne', 'api::service.service'>;
     source: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1357,6 +1362,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    inquiries: Schema.Attribute.Relation<'oneToMany', 'api::inquiry.inquiry'>;
     is_active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

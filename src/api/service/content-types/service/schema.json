@@ -88,6 +88,12 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "inquiries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inquiry.inquiry",
+      "mappedBy": "service"
     }
   }
 }

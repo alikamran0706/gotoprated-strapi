@@ -11,9 +11,9 @@ module.exports = {
             const result = await strapi.db.query('api::inquiry.inquiry').findOne({
                 where: { id: resultEvent.id },
                 populate: [
-                    'package',
+                    'company',
                     'user',
-                    'agency'
+                    'service'
                 ]
             });
 
@@ -31,6 +31,11 @@ module.exports = {
 
             const flatData = flattenObject(result);
 
+            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
+            console.log(flatData)
+            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
+            console.log(body)
+            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
             console.log(result)
             console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
 

@@ -53,6 +53,22 @@
     },
     "userAgent": {
       "type": "string"
+    },
+    "service": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::service.service",
+      "inversedBy": "inquiries"
+    },
+    "priority": {
+      "type": "enumeration",
+      "default": "Normal",
+      "enum": [
+        "Urgent",
+        "Important",
+        "Normal",
+        "Low"
+      ]
     }
   }
 }

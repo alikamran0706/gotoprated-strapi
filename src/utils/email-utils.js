@@ -635,7 +635,7 @@ export function replaceInquiryPlaceholders(template, data) {
     const trimmedKey = key.trim();
 
     if (trimmedKey === 'admin_dashboard_link')
-      return `${adminDashboardUrl}/admin`;
+      return `${adminDashboardUrl}/dash`;
     else if (trimmedKey === 'live_package_link' && data['category.slug'])
       return `${frontendUrl}/${data['category.slug']}-packages/${data.slug}`;
     else if (trimmedKey === 'dashboard_link')
@@ -646,31 +646,11 @@ export function replaceInquiryPlaceholders(template, data) {
       return `${adminDashboardPackageUrl}${data.documentId}`;
     else if (trimmedKey === 'createdAt' && data.createdAt)
       return formatDate(data.createdAt);
-    else if (trimmedKey === 'duration_days' && data.duration_days)
-      return `${data.duration_days} Days`;
-    else if (trimmedKey === 'package_duration')
-      return `${data['package.duration_days']} Days / ${data['package.duration_nights']} Nights`;
-    else if (trimmedKey === 'package_icon')
-      return data['category.slug'] === 'umrah' ? '🕌' : '🕋';
-    else if (trimmedKey === 'category')
-      return data['category.name'];
-    else if (trimmedKey === 'package_title')
-      return data['package.title'];
-    else if (trimmedKey === 'package_short_description')
-      return data['package.short_description'];
-    else if (trimmedKey === 'package_description')
-      return data['package.description'];
+    else if (trimmedKey === 'full_name' && data.full_name)
+      return `${data.full_name}`;
 
-    else if (trimmedKey === 'package_price')
-      return data['package.price'];
-    else if (trimmedKey === 'package_currency')
-      return data['package.currency'];
-
-    else if (trimmedKey === 'package_location' && (data['package.country.name'] || data['package.city.name']))
-      return `${data['package.country.name']} ${data['package.city.name']}`;
-
-    else if (trimmedKey === 'agency_name' && data['agency.legal_name'])
-      return `${data['agency.legal_name']}`;
+    else if (trimmedKey === 'agency_name' && data['agency.name'])
+      return `${data['company.name']}`;
 
     else if (trimmedKey === 'package_status_badge') {
       const status = data.package_status?.toLowerCase() || 'pending';
