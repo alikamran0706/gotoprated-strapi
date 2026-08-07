@@ -46,7 +46,7 @@ module.exports = {
 
             const subject = replacedSubject || `I have a question`;
 
-            const toEmail = result.agency?.email || process.env.ADMIN_EMAIL
+            const toEmail = result.coompany?.email || process.env.ADMIN_EMAIL
 
             try {
                 await strapi.plugin('email').service('email').send({
