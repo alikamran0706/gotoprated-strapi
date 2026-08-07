@@ -45,9 +45,6 @@
     "subject": {
       "type": "text"
     },
-    "opened_at": {
-      "type": "datetime"
-    },
     "error_message": {
       "type": "text"
     },

@@ -657,6 +657,19 @@ export function replaceInquiryPlaceholders(template, data) {
       return `${frontendUrl}/terms-and-conditions`;
     }
 
+    if (trimmedKey === 'current_year') {
+      return String(new Date().getFullYear());
+    }
+    
+    // 3. Current date
+    if (trimmedKey === 'current_date') {
+      return new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
     else if (trimmedKey === 'privacy_link') {
       return `${frontendUrl}/privacy-policy`;
     }

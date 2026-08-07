@@ -18,8 +18,6 @@ module.exports = {
                 ]
             });
 
-            console.log(result)
-            console.log('..................afterCreate................................')
             // Extract agency ID from the result
             // The agency might be populated as an object or just the ID
 
@@ -32,18 +30,45 @@ module.exports = {
 
             const flatData = flattenObject(result);
 
-            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
-            console.log(emailSubject)
-            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
-
             const replacedSubject = replaceInquiryPlaceholders(emailSubject, flatData);
             const replacedHtml = replaceInquiryPlaceholders(body, flatData);
             const extraHtml = emailBodyTemplate();
             const concatBody = injectBeforeSecondLastClosingTag(replacedHtml, extraHtml);
 
             const subject = replacedSubject || `I have a question`;
-
             const toEmail = result.company?.email || process.env.ADMIN_EMAIL
+            const recipientName = result.company?.name || 'Company';
+
+             let emailLogData = {
+                recipient: toEmail,
+                recipient_name: recipientName,
+                email_type: 'contact_form',
+                email_log_status: 'sent',
+                subject: subject,
+                company: result.company?.documentId || result.company?.id,
+                inquiry: result.documentId,
+                user: result.user?.documentId || result.user?.id,
+                metadata: {
+                    inquiry_id: result.id,
+                    inquiry_documentId: result.documentId,
+                    full_name: result.full_name,
+                    email: result.email,
+                    phone: result.phone,
+                    countryCode: result.countryCode,
+                    source: result.source,
+                },
+                content_preview: concatBody?.substring(0, 500) || null,
+            };
+
+            // Remove undefined values
+            Object.keys(emailLogData).forEach(key => {
+                if (emailLogData[key] === undefined || emailLogData[key] === null) {
+                    delete emailLogData[key];
+                }
+            });
+
+            let emailLog = null;
+            let emailError = null;
 
             try {
                 await strapi.plugin('email').service('email').send({
@@ -58,6 +83,30 @@ module.exports = {
                 });
             } catch (emailError) {
                 strapi.log.error(`Error sending email: ${emailError.message}`);
+            }
+
+             // ── Create Email Log Entry ──
+            try {
+                emailLog = await strapi.entityService.create('api::email-log.email-log', {
+                    data: emailLogData,
+                });
+                strapi.log.info(`Email log created for inquiry ${result.id}`);
+            } catch (logError) {
+                strapi.log.error(`Error creating email log: ${logError.message}`);
+            }
+
+            // ── If email failed, update the email log with error details ──
+            if (emailError && emailLog) {
+                try {
+                    await strapi.entityService.update('api::email-log.email-log', emailLog.id, {
+                        data: {
+                            email_log_status: 'failed',
+                            error_message: emailError.message,
+                        },
+                    });
+                } catch (updateError) {
+                    strapi.log.error(`Error updating email log: ${updateError.message}`);
+                }
             }
 
         } catch (error) {

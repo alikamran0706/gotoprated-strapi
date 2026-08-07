@@ -1013,7 +1013,6 @@ export interface ApiEmailLogEmailLog extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     metadata: Schema.Attribute.JSON;
-    opened_at: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
     recipient: Schema.Attribute.Email & Schema.Attribute.Required;
     recipient_name: Schema.Attribute.String;
