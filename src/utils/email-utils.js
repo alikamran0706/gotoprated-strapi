@@ -631,7 +631,8 @@ export function replaceAgencyPlaceholders(template, data) {
 
 export function replaceInquiryPlaceholders(template, data) {
   if (!template || typeof template !== 'string') return '';
-  return template.replace(/\{(.*?)\}/g, (_, key) => {
+  // return template.replace(/\{(.*?)\}/g, (_, key) => {
+  return template.replace(/\{\{(.*?)\}\}/g, (_, key) => {
     const trimmedKey = key.trim();
 
     if (trimmedKey === 'admin_dashboard_link')
@@ -642,14 +643,14 @@ export function replaceInquiryPlaceholders(template, data) {
       return agencyDashboardUrl;
 
 
-    else if (trimmedKey === 'admin_review_link' && data.documentId)
-      return `${adminDashboardPackageUrl}${data.documentId}`;
+    else if (trimmedKey === 'company_profile_url')
+      return `${frontendUrl}/dashboard`;
     else if (trimmedKey === 'createdAt' && data.createdAt)
       return formatDate(data.createdAt);
     else if (trimmedKey === 'full_name' && data.full_name)
       return `${data.full_name}`;
 
-    else if (trimmedKey === 'agency_name' && data['agency.name'])
+    else if (trimmedKey === 'agency_name' && data['company.name'])
       return `${data['company.name']}`;
 
     else if (trimmedKey === 'terms_link') {
@@ -659,7 +660,9 @@ export function replaceInquiryPlaceholders(template, data) {
     else if (trimmedKey === 'privacy_link') {
       return `${frontendUrl}/privacy-policy`;
     }
-
+    else if (trimmedKey === 'contact_us') {
+      return `${frontendUrl}/contact-us`;
+    }
 
     return getValueByPath(data, trimmedKey);
   });

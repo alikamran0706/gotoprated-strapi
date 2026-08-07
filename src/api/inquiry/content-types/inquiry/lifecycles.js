@@ -5,6 +5,7 @@ const { emailBodyTemplate, injectBeforeSecondLastClosingTag, flattenObject, repl
 module.exports = {
     async afterCreate(event) {
         const { result: resultEvent } = event;
+        if (!resultEvent.publishedAt) return;
         console.log('..................afterCreate................................')
         try {
 
@@ -32,11 +33,7 @@ module.exports = {
             const flatData = flattenObject(result);
 
             console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
-            console.log(flatData)
-            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
-            console.log(body)
-            console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
-            console.log(result)
+            console.log(emailSubject)
             console.log('ffffffffffffffffffffffffffffffffffffffffffffffff')
 
             const replacedSubject = replaceInquiryPlaceholders(emailSubject, flatData);
