@@ -383,12 +383,12 @@ const subjectConfig = {
 export function replaceAgencyPlaceholders(template, data) {
 
   if (!template || typeof template !== 'string') return '';
-  return template.replace(/\{(.*?)\}/g, (_, key) => {
+ return template.replace(/\{\{(.*?)\}\}/g, (_, key) => {
     const trimmedKey = key.trim();
-    if (trimmedKey === 'live_package_link' && data['category.slug'])
-      return `${frontendUrl}/${data['category.slug']}-packages/${data.slug}`;
-    else if (trimmedKey === 'company_profile_url')
+    if (trimmedKey === 'dashboard_url')
       return `${frontendUrl}/dashboard`;
+    else if (trimmedKey === 'company_profile_url')
+      return `${frontendUrl}/biz/${data.slug}`;
     else if (trimmedKey === 'plumbing')
       return `${frontendUrl}/ae/plumbing`;
     else if (trimmedKey === 'electrical')
@@ -590,7 +590,7 @@ export function replaceAgencyPlaceholders(template, data) {
 
     else if (trimmedKey === 'agency_name') {
       const name = data.name || 'Agency';
-      return name.charAt(0).toUpperCase();
+      return name;
     }
 
     else if (trimmedKey === 'services_badges' && data.services_offered) {
