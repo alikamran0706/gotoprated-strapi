@@ -32,7 +32,7 @@ module.exports = {
                 const replacedSubject = replaceAgencyPlaceholders(emailSubject, flatData);
                 const replacedHtml = replaceAgencyPlaceholders(body, flatData);
                 const extraHtml = emailBodyTemplate();
-                const concatBody = injectBeforeSecondLastClosingTag(replacedHtml, extraHtml);
+                const concatBody = replacedHtml;
 
                 const subject = replacedSubject || `I have a question`;
                 const toEmail = result?.email || process.env.ADMIN_EMAIL

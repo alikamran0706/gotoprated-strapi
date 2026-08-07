@@ -33,7 +33,7 @@ module.exports = {
             const replacedSubject = replaceInquiryPlaceholders(emailSubject, flatData);
             const replacedHtml = replaceInquiryPlaceholders(body, flatData);
             const extraHtml = emailBodyTemplate();
-            const concatBody = injectBeforeSecondLastClosingTag(replacedHtml, extraHtml);
+            const concatBody = replacedHtml;
 
             const subject = replacedSubject || `I have a question`;
             const toEmail = result.company?.email || process.env.ADMIN_EMAIL
