@@ -385,20 +385,19 @@ export function replaceAgencyPlaceholders(template, data) {
   if (!template || typeof template !== 'string') return '';
   return template.replace(/\{(.*?)\}/g, (_, key) => {
     const trimmedKey = key.trim();
-    if (trimmedKey === 'admin_dashboard_link')
-      return `${adminDashboardUrl}/admin`;
-    else if (trimmedKey === 'live_package_link' && data['category.slug'])
+    if (trimmedKey === 'live_package_link' && data['category.slug'])
       return `${frontendUrl}/${data['category.slug']}-packages/${data.slug}`;
-    else if (trimmedKey === 'dashboard_link')
-      return agencyDashboardUrl;
-    else if (trimmedKey === 'admin_view_agency_link')
-      return `${adminDashboardAgencyUrl}/${data.documentId}`;
+    else if (trimmedKey === 'company_profile_url')
+      return `${frontendUrl}/dashboard`;
+    else if (trimmedKey === 'plumbing')
+      return `${frontendUrl}/ae/plumbing`;
+    else if (trimmedKey === 'electrical')
+      return `${frontendUrl}/ae/electrical`;
+    else if (trimmedKey === 'drain_cleaning')
+      return `${frontendUrl}/ae/drain-cleaning`;
     else if (trimmedKey === 'email_subject') {
-      const agencyName = data.agency_name || data.legal_name || data.customer_name || data.full_name || 'Your Agency';
-
       const subjectTemplate = subjectConfig[data.profile_status] || subjectConfig.default;
-
-      return subjectTemplate.replace('{agency_name}', agencyName);
+      return subjectTemplate.replace('{agency_name}', data.name);
     }
     else if (trimmedKey === 'status_heading') {
       const statusHeadings = {
@@ -476,7 +475,6 @@ export function replaceAgencyPlaceholders(template, data) {
       };
       return statusColors[data.profile_status] || statusColors.default;
     }
-
 
     else if (trimmedKey === 'intro_text') {
       const introTexts = {
@@ -590,8 +588,8 @@ export function replaceAgencyPlaceholders(template, data) {
       return '';
     }
 
-    else if (trimmedKey === 'agency_initial') {
-      const name = data.agency_name || data.legal_name || data.customer_name || 'Agency';
+    else if (trimmedKey === 'agency_name') {
+      const name = data.name || 'Agency';
       return name.charAt(0).toUpperCase();
     }
 
@@ -617,12 +615,15 @@ export function replaceAgencyPlaceholders(template, data) {
       }
       return '<span style="color:#999;">No services listed</span>';
     }
-    else if (trimmedKey === 'terms_link') {
-      return `${frontendUrl}/terms-and-conditions`;
-    }
 
     else if (trimmedKey === 'privacy_link') {
       return `${frontendUrl}/privacy-policy`;
+    }
+    else if (trimmedKey === 'contact_us') {
+      return `${frontendUrl}/contact-us`;
+    }
+    else if (trimmedKey === 'terms_link') {
+      return `${frontendUrl}/terms-and-conditions`;
     }
 
     return getValueByPath(data, trimmedKey);
@@ -653,14 +654,10 @@ export function replaceInquiryPlaceholders(template, data) {
     else if (trimmedKey === 'agency_name' && data['company.name'])
       return `${data['company.name']}`;
 
-    else if (trimmedKey === 'terms_link') {
-      return `${frontendUrl}/terms-and-conditions`;
-    }
-
     if (trimmedKey === 'current_year') {
       return String(new Date().getFullYear());
     }
-    
+
     // 3. Current date
     if (trimmedKey === 'current_date') {
       return new Date().toLocaleDateString('en-US', {
@@ -675,6 +672,9 @@ export function replaceInquiryPlaceholders(template, data) {
     }
     else if (trimmedKey === 'contact_us') {
       return `${frontendUrl}/contact-us`;
+    }
+    else if (trimmedKey === 'terms_link') {
+      return `${frontendUrl}/terms-and-conditions`;
     }
 
     return getValueByPath(data, trimmedKey);

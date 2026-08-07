@@ -1,106 +1,71 @@
 'use strict';
 
+const { replaceAgencyPlaceholders, flattenObject, emailBodyTemplate, injectBeforeSecondLastClosingTag } = require("../../../../utils/email-utils");
+
 module.exports = {
     async afterCreate(event) {
         const { result: resultEvent, params } = event;
         if (!resultEvent.publishedAt) return;
         try {
-
-            const result = await strapi.db.query('api::package.package').findOne({
+            console.log('Calllll...................llllllllllllllllllllllllllllll')
+            const result = await strapi.db.query('api::company.company').findOne({
                 where: { id: resultEvent.id },
                 populate: [
-                    'agency',
-                    'cover_image',
-                    'images',
+                    'user',
+                    'logo',
                     'city',
                     'country',
-                    'category'
+                    'categories'
                 ]
             });
 
-            // Generate slug if not provided
-            if (result.title && (!result.slug || result.slug === '')) {
-                // Convert title to slug: lowercase, replace spaces with hyphens, remove special chars
-                const baseSlug = result.title
-                    .toLowerCase()
-                    .replace(/[^a-z0-9\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/-+/g, '-');
-
-                // Add package ID to ensure uniqueness
-                // const uniqueSlug = `${baseSlug}-${result.id || result.documentId}`;
-
-                const isExist = await strapi.db.query('api::package.package').findOne({
-                    where: { slug: baseSlug },
-
-                });
-                let uniqueSlug = null;
-                if (isExist) {
-                    uniqueSlug = `${baseSlug}-${result.id || result.documentId}`;
-                }
-                else {
-                    uniqueSlug = baseSlug;
-                }
-
-                // Update the package with the generated slug
-                await strapi.db.query('api::package.package').update({
-                    where: { id: result.id },
-                    data: {
-                        slug: uniqueSlug
-                    }
-                });
-
-                // Update the result object with the new slug
-                result.slug = uniqueSlug;
-
-                strapi.log.info(`Generated slug for package ${result.documentId}: ${uniqueSlug}`);
-            }
-
-            // Extract agency ID from the result
-            let agencyId;
-
-            if (result.agency || params.data?.agency) {
-                // If agency is populated as an object
-                if (typeof result.agency === 'object' && result.agency?.documentId) {
-                    agencyId = result.agency?.documentId;
-                } else if (typeof result.agency === 'object' && result.agency?.id) {
-                    agencyId = result.agency?.id;
-                } else if (typeof result.agency === 'string') {
-                    // If it's just a string ID
-                    agencyId = result.agency;
-                } else if (result.agency?.documentId) {
-                    // If it's nested in params data
-                    agencyId = result.agency?.documentId;
-                }
-                else if (params.data.agency?.set?.[0]?.id || params.data.agency) {
-                    agencyId = params.data.agency.set?.[0]?.id || params.data.agency;
-                }
-            }
-
-            if (!agencyId) {
-                strapi.log.warn(`No agency ID found for package ${result.documentId}`);
-                return;
-            }
-
             // Send email to admin when package is created with pending status
-            if (result.package_status === 'Pending' || !result.package_status) {
+            if (result.company_status === 'Pending' || !result.company_status) {
                 const template = await strapi.entityService.findMany('api::email-template.email-template', {
-                    filters: { slug: 'package-admin' },
+                    filters: { slug: 'company-wellcome' },
                     limit: 1,
                 });
 
+                const { subject: emailSubject, body } = template[0];
+
+                const flatData = flattenObject(result);
+
+                const replacedSubject = replaceAgencyPlaceholders(emailSubject, flatData);
+                const replacedHtml = replaceAgencyPlaceholders(body, flatData);
+                const extraHtml = emailBodyTemplate();
+                const concatBody = injectBeforeSecondLastClosingTag(replacedHtml, extraHtml);
+
+                const subject = replacedSubject || `I have a question`;
+                const toEmail = result.company?.email || process.env.ADMIN_EMAIL
+                const recipientName = result.company?.name || 'Company';
+
                 try {
-                    if (strapi.service('api::package.email')) {
-                        await strapi.service('api::package.email').sendPackagePendingEmail(result, template[0]);
-                    } else if (strapi.service('api::email.email')) {
-                        // Try alternative service name
-                        await strapi.service('api::email.email').sendPackagePendingEmail(result, template[0]);
-                    } else {
-                        strapi.log.warn('Email service not found. Check service registration.');
-                    }
-                } catch (emailError) {
-                    strapi.log.error(`Error sending email: ${emailError.message}`);
-                }
+                await strapi.plugin('email').service('email').send({
+                    to: toEmail,
+                    subject: subject,
+                    html: concatBody || `
+                            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; background-color: #f9f9f9; border: 1px solid #e0e0e0;">
+                                <h2 style="color: #222;">Hello,</h2>
+                                <p>strong>Welcome to GoTopRated ${result.name}</strong> </p>
+                            </div>
+                        `,
+                });
+            } catch (emailError) {
+                strapi.log.error(`Error sending email: ${emailError.message}`);
+            }
+
+                // try {
+                //     if (strapi.service('api::package.email')) {
+                //         await strapi.service('api::package.email').sendPackagePendingEmail(result, template[0]);
+                //     } else if (strapi.service('api::email.email')) {
+                //         // Try alternative service name
+                //         await strapi.service('api::email.email').sendPackagePendingEmail(result, template[0]);
+                //     } else {
+                //         strapi.log.warn('Email service not found. Check service registration.');
+                //     }
+                // } catch (emailError) {
+                //     strapi.log.error(`Error sending email: ${emailError.message}`);
+                // }
             }
 
             strapi.log.info(`Package ${result.documentId} created. Email notifications sent.`);
@@ -135,15 +100,14 @@ module.exports = {
         if (!resultEvent.publishedAt) return;
         const oldStatus = state?.oldStatus;
 
-        const result = await strapi.db.query('api::package.package').findOne({
+        const result = await strapi.db.query('api::company.company').findOne({
             where: { id: resultEvent.id },
             populate: [
-                'agency',
-                'cover_image',
-                'images',
+                'user',
+                'logo',
                 'city',
                 'country',
-                'category'
+                'categories'
             ]
         });
 
