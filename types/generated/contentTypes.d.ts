@@ -1202,6 +1202,7 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    userAgent: Schema.Attribute.String;
   };
 }
 

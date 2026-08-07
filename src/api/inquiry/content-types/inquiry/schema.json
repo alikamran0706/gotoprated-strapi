@@ -50,6 +50,9 @@
       "relation": "oneToMany",
       "target": "api::email-log.email-log",
       "mappedBy": "inquiry"
+    },
+    "userAgent": {
+      "type": "string"
     }
   }
 }
