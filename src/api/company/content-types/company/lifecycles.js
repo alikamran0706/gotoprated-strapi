@@ -31,12 +31,12 @@ module.exports = {
 
                 const replacedSubject = replaceAgencyPlaceholders(emailSubject, flatData);
                 const replacedHtml = replaceAgencyPlaceholders(body, flatData);
-                const extraHtml = emailBodyTemplate();
+                // const extraHtml = emailBodyTemplate();
                 const concatBody = replacedHtml;
 
                 const subject = replacedSubject || `I have a question`;
                 const toEmail = result?.email || process.env.ADMIN_EMAIL
-                const recipientName = result?.name || 'Company';
+                // const recipientName = result?.name || 'Company';
 
                 try {
                     await strapi.plugin('email').service('email').send({

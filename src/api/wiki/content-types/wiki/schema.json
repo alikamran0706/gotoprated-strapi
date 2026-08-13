@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wikis",
+  "info": {
+    "singularName": "wiki",
+    "pluralName": "wikis",
+    "displayName": "Wiki"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "ss": {
+      "type": "string"
+    },
+    "country_code": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "city"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "text"
+    }
+  }
+}
